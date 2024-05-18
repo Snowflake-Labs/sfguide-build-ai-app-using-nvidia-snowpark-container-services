@@ -1,6 +1,6 @@
 # Docker Image Build Steps
 
-### Docker login to nvcr.io login credentials on nvidia config set in https://org.ngc.nvidia.com/setup/api-key
+### Docker login to nvcr.io. login credentials after registering in nvidia config set in https://org.ngc.nvidia.com/setup/api-key
 docker login nvcr.io  
 user : "userid"  
 password : "Auth Key"      
