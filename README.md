@@ -110,7 +110,7 @@ Execute the Following the scripts in this sequence from the Provider scripts.
 
 ```
 USE DATABASE NVIDIA_NEMO_MS_APP;
-USE SCHEMA APP1;
+USE SCHEMA <APP schema>; -- This schema is based on where the app was created.
 /*
 CALL CORE.STOP_APP_INSTANCE('APP1');
 CALL CORE.DROP_APP_INSTANCE('APP1');
