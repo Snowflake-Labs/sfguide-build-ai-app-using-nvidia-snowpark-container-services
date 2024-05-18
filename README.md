@@ -8,7 +8,7 @@ If you are interested to compress a different Large Language Model from Huggingf
 
 #### NVIDIA related
 
-In this example, eventhough we are not downloading the model hosted on [nvcr.io](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags), you still need a login from NVIDIA for [NGC](https://ngc.nvidia.com/signin) to use the [NIMs container](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags)).
+In this example, We are not downloading the model hosted on [nvcr.io](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags), but we will be using [NIMs container](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags)), so please register and create your a login.
 
 ![](./NVIDIA-NeMo.gif)
 
