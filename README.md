@@ -8,7 +8,7 @@ If you are interested to compress a different Large Language Model from Huggingf
 
 #### NVIDIA related
 
-The Microservices version of the NeMo inference engine requires the model to be downlaoded from the NVIDIA repository at [nvcr.io](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags). For that, you need a login from NVIDIA for [NGC](https://ngc.nvidia.com/signin). With that you can request an API token to login to the NVIDIA repository.
+In this example, eventhough we are not downloading the model hosted on [nvcr.io](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags), you still need a login from NVIDIA for [NGC](https://ngc.nvidia.com/signin) to use the [NIMs container](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags)).
 
 ![](./NVIDIA-NeMo.gif)
 
