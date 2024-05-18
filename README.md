@@ -92,21 +92,17 @@ Since we are using a currently PrPr, soon to be PuPr NA <-> SPCS feature, you ne
 
 #### As a Provider  
 Execute the Following the scripts in this sequence from the Provider scripts.  
-01 [Setup.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/01%20Setup.sql)  
-02 [NIM Provider Application Pkg.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/02%20nims_app_pkg.sql)  
-03 [Validation and output.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/03%20Validation%20and%20Output.sql)  
-04 [Publish Application.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/04%20Publish%20Application.sql)  
+1. [Setup.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/01%20Setup.sql)
+
+STOP HERE AND FOLLOW THE DOCKER INSTALLATION STEPS
+
+2. [NIM Provider Application Pkg.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/02%20nims_app_pkg.sql)  
+3. [Validation and output.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/03%20Validation%20and%20Output.sql)  
+4. [Publish Application.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/04%20Publish%20Application.sql)  
   
 #### As a Consumer (Template for testing)  
 Execute the Following the scripts in this sequence from the Provider scripts.  
-05 [Consumer App Template.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Consumer/05%20Consumer%20App%20Template.sql)  
-
-1. an instance name
-2. a compute pool
-3. a device list, i.e. GPUs to be used
-4. number of GPUs per isntance
-5. number of inferencing instances 
-6. max_tokens and temperature
+5. [Consumer App Template.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Consumer/05%20Consumer%20App%20Template.sql)  
 
 ## User Interface
 
