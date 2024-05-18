@@ -14,7 +14,7 @@ docker build . -t lab:v01
 ### Check if all images are created locally
 docker images  
 
-### docker login to snowflake image repository
+### docker login to snowflake image repository (you can get your image repository url using "SHOW IMAGE REPOSITORIES")
 docker login <snowflakeurl>/nvidia_nemo_ms_master/code_schema/service_repo  
 user : "snowflake user id"
 password : "password" 
