@@ -1,7 +1,7 @@
 # Docker Image Build Steps
 
 ### Build all 4 images
-docker build . -t inference:v01
+docker build . -t inference:v01 [^2]:  
 docker build . -t model-store:v01
 docker build . -t snowflake_handler:v01
 docker build . -t lab:v01
