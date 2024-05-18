@@ -8,13 +8,14 @@ If you are interested to compress a different Large Language Model from Huggingf
 
 #### NVIDIA related
 
-The Microservices version of the NeMo inference engine requires the model to be downlaoded from the NVIDIA repository at [nvcr.io](https://nvcr.io). For that you need a login from NVIDIA for [NGC](https://ngc.nvidia.com/signin). With that you can request an API token to login to the NVIDIA repository.
+The Microservices version of the NeMo inference engine requires the model to be downlaoded from the NVIDIA repository at [nvcr.io](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags). For that, you need a login from NVIDIA for [NGC](https://ngc.nvidia.com/signin). With that you can request an API token to login to the NVIDIA repository.
 
 ![](./NVIDIA-NeMo.gif)
 
 #### Huggingface related
 
 Since you are downloading the model from Huggingface, you need to register and create a [HuggingFace](https://huggingface.co/) user login. After logging into huggingface with your userid and password, [create a user access token](https://huggingface.co/docs/hub/en/security-tokens) to clone any model using git_lfs. This is a required step to clone a Large Language model such as Mistral-7b-instructv0.1  
+
 Make sure you edit [model_generator.sh](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/docker/inference/modelgenerator.sh) and replace the "user" and "token" with your information from huggingface before you move to the next step.
 
 ```
