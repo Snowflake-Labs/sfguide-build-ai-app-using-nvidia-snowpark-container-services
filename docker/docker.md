@@ -2,7 +2,7 @@
 
 ### Docker login to nvcr.io using ngc.nvidia login credentials
 docker login nvcr.io  
-user : <userid>  
+user : <<userid>>  
 password : <token>      
 
 ### Build all 4 images
