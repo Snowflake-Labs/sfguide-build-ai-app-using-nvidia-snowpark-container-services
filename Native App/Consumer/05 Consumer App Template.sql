@@ -1,4 +1,5 @@
 set APP_INSTANCE='<NAME>';
+-- replace current_database() with a 'DATABASE NAME OF YOUR CHOICE' if compute pool create fails
 set APP_DATABASE=current_database();
 set APP_COMPUTE_POOL='NVIDIA_NEMO_'||$APP_INSTANCE;
 set APP_CUDA_DEVICES='<LIST OF DEVICE NUMBERS>'; 
