@@ -3,7 +3,7 @@
 # NVIDIA NeMo Inference Service (NIM)
 
 In this repo we primarily show how to download the Large Language Model [Mistral-7b-instructv0.1](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1) from [HuggingFace](https://huggingface.co/) and then shrink the model size to fit a smaller GPU on [NemoLLM Inference Microservice NIMs](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags) Container using the [model_generator](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/docker/inference/modelgenerator.sh) and [instruct.yaml](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/docker/inference/instruct.yaml) provided by NVIDIA.
-
+![](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/NVIDIA%20Mistral%207B%20NIMS%20on%20SPCS.png)
 If you are interested to compress a different Large Language Model from Huggingface, you need a different instruct.yaml file that will generate a new model that will fit in a smaller GPU.
 
 #### NVIDIA related
@@ -103,26 +103,6 @@ docker run -it --rm=true <snowflakeurl>/nvidia_nemo_ms_master/code_schema/servic
   
 #### As a Consumer (Template for testing)  
 Execute the Following the scripts in this sequence from the Provider scripts.  
-5. [Consumer App Template.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Consumer/05%20Consumer%20App%20Template.sql)  
-
-## User Interface
-
-### The ```ping()``` UDF
-
-The ping function is used to determine if the inference is service is up. It returns *pong*.
-
-```
-    SELECT <your instance>.ping()
-```
-
-### The ```inference(<model>,<prompt>,<max_tokens>,<temperature>)``` UDF
-
-The inference function requires 4 arguments, i.e. the model name (which is currently always llama2), a prompt, max_tokens, temperature. It returns the completion for each row passed.
-
-```
-    SELECT <your instance>.inference(<model>,<prompt>,<max_tokens>,<temperature>)
-```
-
-## Known Issues
+5. [Consumer App Template.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Consumer/05%20Consumer%20App%20Template.sql) 
 
 
