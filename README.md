@@ -23,7 +23,7 @@ git clone https://<user>:<token>@huggingface.co/mistralai/Mistral-7B-Instruct-v0
 
 ```
 
-### Model Generatore Explained
+### Model Generator Explained
 
 ```
 # makes directory for the model download from huggingface in the blockstorage we mount on snowpark container service
