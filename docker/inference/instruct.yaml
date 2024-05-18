@@ -1,0 +1,26 @@
+model_repo_path: "/blockstore/model/store"
+model_type: "MISTRAL"
+backend: "trt_llm"
+customization_cache_capacity: 10000
+logging_level: "INFO"
+enable_chat: true
+preprocessor:
+  prompt_templates: 
+    chat: "{% for message in messages %}{% if (message['role'] == 'user') != (loop.index0 % 2 == 0) %}{{ raise_exception('Conversation roles must alternate user/assistant/user/assistant/...') }}{% endif %}{% if message['role'] == 'user' %}{{ '[INST] ' + message['content'] + ' [/INST]' }}{% elif message['role'] == 'assistant' %}{{ message['content'] + eos_token + ' ' }}{% else %}{{ raise_exception('Only user and assistant roles are supported!') }}{% endif %}{% endfor %}"
+    stop_words: [</s>]
+pipeline:
+  model_name: "ensemble"
+  num_instances: 4
+trt_llm:
+  use: true
+  model_name: "trt_llm"
+  model_type: "llama"
+  ckpt_type: "hf"
+  model_path: /blockstore/clone
+  data_type: "float16"
+  num_gpus: 1
+  tensor_para_size: 1
+  pipeline_para_size: 1
+  max_batch_size: 4
+  max_input_len: 3072
+  max_output_len: 1024
