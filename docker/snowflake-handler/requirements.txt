@@ -1,0 +1,4 @@
+streamlit
+flask
+openai
+snowflake-snowpark-python[pandas]
