@@ -106,4 +106,16 @@ docker run -it --rm=true <snowflakeurl>/nvidia_nemo_ms_master/code_schema/servic
 Execute the Following the scripts in this sequence from the Provider scripts.  
 5. [Consumer App Template.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Consumer/05%20Consumer%20App%20Template.sql) 
 
+### After the app has successfully launched, the App will show the status as "Ready(Running)". Grab the "Endpoint URL" next to Streamlit chat interface which will invoke the inference service (LLM Model loaded and in this case Mistral-7b-instruct).
 
+```
+USE DATABASE NVIDIA_NEMO_MS_APP;
+USE SCHEMA APP1;
+/*
+CALL CORE.STOP_APP_INSTANCE('APP1');
+CALL CORE.DROP_APP_INSTANCE('APP1');
+CALL CORE.RESTART_APP_INSTANCE('APP1');
+*/
+CALL CORE.LIST_APP_INSTANCE('APP1'); -- MAKE SURE ALL CONTAINERS ARE READY
+CALL CORE.GET_APP_ENDPOINT('APP1'); -- GET APP ENDPOINTS TO ACCESS STREAMLIT APP
+```
