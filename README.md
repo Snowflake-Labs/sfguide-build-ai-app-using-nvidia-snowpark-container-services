@@ -26,6 +26,8 @@ Under the hood, this app uses [fastchat api](https://github.com/lm-sys/FastChat/
 
 # Installation
 
+## Docker Installation
+
 ### Docker Image Build 
 
 #### Docker login to nvcr.io. (login credentials after registering in nvidia config set in https://org.ngc.nvidia.com/setup/api-key)
