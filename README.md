@@ -30,6 +30,15 @@ Under the hood, this app uses [fastchat api](https://github.com/lm-sys/FastChat/
 
 # Installation
 
+## Native App Installation 
+
+Since we are using a currently PrPr, soon to be PuPr NA <-> SPCS feature, you need to request the account where you are planning to build the provider app is enabled.
+
+#### As a Provider  
+Execute the Following the scripts in this sequence from the Provider scripts.  
+1. [Setup.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/01%20Setup.sql)
+
+STOP HERE AND FOLLOW THE DOCKER INSTALLATION STEPS
 ## Docker Installation
 
 ### Docker Image Build 
@@ -86,15 +95,7 @@ docker push <snowflakeurl>/nvidia_nemo_ms_master/code_schema/service_repo/snowfl
 docker run -it --rm=true <snowflakeurl>/nvidia_nemo_ms_master/code_schema/service_repo/nemollm-inference-ms:24.02.nimshf /bin/bash  
 ```
 
-## Native App Installation 
-
-Since we are using a currently PrPr, soon to be PuPr NA <-> SPCS feature, you need to request the account where you are planning to build the provider app is enabled.
-
-#### As a Provider  
-Execute the Following the scripts in this sequence from the Provider scripts.  
-1. [Setup.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/01%20Setup.sql)
-
-STOP HERE AND FOLLOW THE DOCKER INSTALLATION STEPS
+### Resume Native App Installation
 
 2. [NIM Provider Application Pkg.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/02%20nims_app_pkg.sql)  
 3. [Validation and output.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/03%20Validation%20and%20Output.sql)  
