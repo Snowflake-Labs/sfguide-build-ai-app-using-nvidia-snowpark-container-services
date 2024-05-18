@@ -1,9 +1,9 @@
 # Docker Image Build Steps
 
-### Docker login to nvcr.io using ngc.nvidia login credentials
+### Docker login to nvcr.io login credentials on nvidia config set in https://org.ngc.nvidia.com/setup/api-key
 docker login nvcr.io  
-user : "userid"
-password : <token>      
+user : "userid"  
+password : "Auth Key"      
 
 ### Build all 4 images
 docker build . -t inference:v01     
@@ -16,8 +16,8 @@ docker images
 
 ### docker login to snowflake image repository
 docker login <snowflakeurl>/nvidia_nemo_ms_master/code_schema/service_repo  
-user : <snowflake user id>  
-password : <password>  
+user : "snowflake user id"
+password : "password" 
 ### Tag all 4 images from local to target destination
 docker tag inference:v01 <snowflakeurl>/nvidia_nemo_ms_master/code_schema/service_repo/nemollm-inference-ms:24.02.nimshf  
 docker tag model-store:v01 <snowflakeurl>/nvidia_nemo_ms_master/code_schema/service_repo/nvidia-nemo-ms-model-store:v01  
