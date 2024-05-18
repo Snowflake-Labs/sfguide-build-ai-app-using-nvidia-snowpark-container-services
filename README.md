@@ -2,11 +2,11 @@
 
 # NVIDIA NeMo Inference Service (NIM)
 
+In this repo we primarily show how to download the Large Language Model [Mistral-7b-instructv0.1](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1) from HuggingFace and then shrink the model size to fit in smaller GPU on [NemoLLM Inference Microservice NIMs](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags) Container using the model_generator and instruct.yaml provided by NVIDIA.
+
+If you are interested to compress a different Large Language Model from Huggingface, you need a different instruct.yaml file that will generate a new model that will fit in a smaller GPU.
+
 #### NVIDIA related
-
-This repo primarily show how to download the Large Language Model from HuggingFace using your login and token. In this case, we are downloading the Mistral-7b-instructv0.1 . On the "Nemo Inference Microservice NIMs" Container and using the instruct.yaml provided by NVIDIA, a compressed model is generated to fit in a A10G GPU (GPU_NV_M) with the model_generator. 
-
-If you are interested to compress a different Large Language Model from Huggingface, we need a different instruct.yaml file that will generate a new model to work on tritron server.
 
 The Microservices version of the NeMo inference engine requires the model to be downlaoded from the NVIDIA repository at [nvcr.io](https://nvcr.io). For that you need a login from NVIDIA for [NGC](https://ngc.nvidia.com/signin). With that you can request an API token to login to the NVIDIA repository.
 
