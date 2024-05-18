@@ -23,6 +23,26 @@ git clone https://<user>:<token>@huggingface.co/mistralai/Mistral-7B-Instruct-v0
 
 ```
 
+### Model Generatore Explained
+
+```
+# makes directory for the model download from huggingface in the blockstorage we mount on snowpark container service
+mkdir /blockstore/clone
+mkdir -p /blockstore/model/store
+
+# download model from huggingface into blockstorage we mount on snowpark container service
+git clone https://<user>:<token>@huggingface.co/mistralai/Mistral-7B-Instruct-v0.1 /blockstore/clone
+
+# modes generator step using instruct.yaml to fit the model on A10G (NV_M) into blockstorage we mount on Snowpark Container service
+model_repo_generator llm --verbose --yaml_config_file=/home/ubuntu/instruct.yaml
+
+#softlink the trt llm models from blockstorage to local at /model-store
+ln -s /blockstore/model/store/ensemble /model-store/ensemble
+
+#softlink the trt llm models from blockstorage  to local at /model-store
+ln -s /blockstore/model/store/trt_llm_0.0.1_trtllm /model-store/trt_llm_0.0.1_trtllm
+```
+
 #### Snowflake related
 
 This is a POC SPCS / NA service implementing the NVIDIA NeMo Microservices inference service. You can access the inference service by a Snowflake UDF. You can find the UDFs in your instance schema under Functions.
