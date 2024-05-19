@@ -2,25 +2,40 @@
 
 # NVIDIA NeMo Inference Service (NIM)
 
-In this repo we primarily show how to download the Large Language Model [Mistral-7b-instructv0.1](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1) from [HuggingFace](https://huggingface.co/) and then shrink the model size to fit a smaller GPU on [NemoLLM Inference Microservice NIMs](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags) Container using the [model_generator](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/docker/inference/modelgenerator.sh) and [instruct.yaml](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/docker/inference/instruct.yaml) provided by NVIDIA.
+This repo primarily shows how to download a Large Language Model [Mistral-7b-instructv0.1](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1) from [HuggingFace](https://huggingface.co/) and then shrink the model size to fit in a smaller GPU(A10G==GPU_NV_M) on [NemoLLM Inference Microservice NIMs](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags) Container using the [model_generator](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/docker/inference/modelgenerator.sh) and [instruct.yaml](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/docker/inference/instruct.yaml) provided by NVIDIA.
 ![](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/NVIDIA%20Mistral%207B%20NIMS%20on%20SPCS.png)
-If you are interested to compress a different Large Language Model from Huggingface, you need a different instruct.yaml file that will generate a new model that will fit in a smaller GPU.
+If you are interested to shrink a different Large Language Model from Huggingface, you need a different instruct.yaml file that will generate a new model which will fit in a smaller GPU.
 
 ##### NVIDIA related
 
-In this example, We are not downloading the model hosted on [nvcr.io](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags), but we will be using [NIMs container](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags), so please register and create your a login.
+In this example, We are not downloading the model hosted on [nvcr.io](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags), but we will still be using [NIMs container](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags) for optimized performance. So please register and create your a login credentials.
 
 ![](./NVIDIA-NeMo.gif)
 
 ##### Huggingface related
 
-Since you are downloading the model from Huggingface, you need to register and create a [HuggingFace](https://huggingface.co/) user login. After logging into huggingface with your userid and password, [create a user access token](https://huggingface.co/docs/hub/en/security-tokens) to clone any model using git_lfs. This is a required step to clone a Large Language model such as Mistral-7b-instructv0.1  
+Since you are downloading the model from Huggingface, you need to register and create a [HuggingFace](https://huggingface.co/) user login. After logging into huggingface with your userid and password, [create a user access token](https://huggingface.co/docs/hub/en/security-tokens) to clone any model using git_lfs in your destination. This is a required step to clone a Large Language model such as Mistral-7b-instructv0.1  
 
 Make sure you edit [model_generator.sh](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/docker/inference/modelgenerator.sh) and replace the "user" and "token" with your information from huggingface before you move to the next step.
 
 ```
 git clone https://<user>:<token>@huggingface.co/mistralai/Mistral-7B-Instruct-v0.1 /blockstore/clone
 
+```
+
+Please note, the folder where the model (git clone) gets downloaded is a blockstorage that is mounted in the Snowpark Container Service. The model size is somewhere ~55 GB and then the new model that would be generated is ~14 GB. So as a best practice, we should mount and use the blockstorage when launching the Snowflake Container. Follow [documentation](https://docs.snowflake.com/en/developer-guide/snowpark-container-services/block-storage-volume) on how to use blockstorage when creating the service in snowpark container service.
+
+```
+  - name: inference
+    image: /NVIDIA_NEMO_MS_MASTER/code_schema/service_repo/nemollm-inference-ms:24.02.nimshf
+    volumeMounts:
+    - name: inferenceblockstore
+      mountPath: /blockstore
+
+  volume:
+  - name: inferenceblockstore
+    source: block
+    size: 200Gi
 ```
 
 ##### Model Generator Explained
