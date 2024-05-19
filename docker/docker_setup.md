@@ -7,7 +7,7 @@ user : "userid"
 password : "Auth Key"      
 ```
 
-#### Build all 4 images
+#### Build all images
 ```
 docker build . -t inference:v01     
 docker build . -t model-store:v01  
