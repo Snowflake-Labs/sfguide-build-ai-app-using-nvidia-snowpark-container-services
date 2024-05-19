@@ -39,6 +39,11 @@ Please note, the folder where the model (git clone) gets downloaded is a blockst
 ```
 
 ##### Model Generator Explained
+Follow these 5 important steps  
+1. Create Folders to download model from huggingface and a folder for storing the generated model.
+2. Git Clone llm model to Blockstorage folder
+3. Generate new model that is shrunk for A10G(GPU_NV_M) into the Blockstorage folder
+4. Create Soft links of the "ensemble" and "trt_llm" folders to the root /model-store folder.
 
 ```
 # makes directory for the model download from huggingface in the blockstorage we mount on snowpark container service
@@ -56,6 +61,28 @@ ln -s /blockstore/model/store/ensemble /model-store/ensemble
 
 #softlink the trt llm models from blockstorage  to local at /model-store
 ln -s /blockstore/model/store/trt_llm_0.0.1_trtllm /model-store/trt_llm_0.0.1_trtllm
+```
+
+##### Inference service launch explained
+In the yaml file while launching the Inference service, 
+1. Executes the [modelgenerator.sh](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/docker/inference/modelgenerator.sh) to generate the model as explained above.
+2. Launch the tritron inference server inside the container with the number of gpu instances requested/assigned.
+
+```
+- name: inference
+    image: /NVIDIA_NEMO_MS_MASTER/code_schema/service_repo/nemollm-inference-ms:24.02.nimshf
+    command:
+    - /bin/bash
+    args:
+    - -c
+    - "(ttyd -p 1235 -W bash &> /tmp/ttyd.log &);sh modelgenerator.sh; nemollm_inference_ms --model mistral --openai_port=9999 --nemo_port=9998 --num_gpus={{num_gpus_per_instance}}"
+    env:
+      CUDA_VISIBLE_DEVICES: {{cuda_devices}}
+    resources:
+      requests:
+        nvidia.com/gpu: {{num_gpus_per_instance}}
+      limits:
+        nvidia.com/gpu: {{num_gpus_per_instance}}
 ```
 
 ##### Snowflake related
