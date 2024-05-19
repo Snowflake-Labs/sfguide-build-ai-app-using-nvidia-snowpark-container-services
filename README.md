@@ -117,17 +117,32 @@ docker push <snowflakeurl>/nvidia_nemo_ms_master/code_schema/service_repo/snowfl
 docker run -it --rm=true <snowflakeurl>/nvidia_nemo_ms_master/code_schema/service_repo/nemollm-inference-ms:24.02.nimshf /bin/bash  
 ```
 
-##### Resume Native App Installation
+##### Resume Native App Installation as Provider
 
 2. [NIM Provider Application Pkg.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/02%20nims_app_pkg.sql)  
-3. [Validation and output.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/03%20Validation%20and%20Output.sql)  
-4. [Publish Application.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/04%20Publish%20Application.sql)  
+3. [Validation and output.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/03%20Validation%20and%20Output.sql)
   
-##### As a Consumer (Template for testing)  
+##### Test the App as a Consumer before Publish
 Execute the Following the scripts in this sequence from the Provider scripts.  
 5. [Consumer App Template.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Consumer/05%20Consumer%20App%20Template.sql) 
 
-##### After the app has successfully launched, the App will show the status as "Ready(Running)". Grab the "Endpoint URL" next to Streamlit chat interface which will invoke the inference service (LLM Model loaded and in this case Mistral-7b-instruct).
+##### Publish Your Native App. 
+Before you publish the App, try to test your App [locally](https://docs.snowflake.com/en/developer-guide/native-apps/installing-testing-application)
+
+If you are sharing internally within your Snowflake Org, you can keep the App Distribution as "internal" but if you are sharing externally then you need to assign the App Distribution as "external". Follow the steps [here](https://other-docs.snowflake.com/en/native-apps/provider-publishing-app-package)
+
+Execute the below script to publish the Application to Marketplace as a Listing.
+4. [Publish Application.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/04%20Publish%20Application.sql)  
+
+Follow the [steps](https://other-docs.snowflake.com/en/native-apps/provider-publishing-app-package) to share the app to consumer
+
+##### As a Consumer
+
+Follow these [steps](https://other-docs.snowflake.com/en/native-apps/consumer-about) to download and install the Native App
+
+After you have installed the App on the consumer account , the demo template will be your starting point, Refer to the [Consumer App template](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Consumer/05%20Consumer%20App%20Template.sql) to update and launch the App.
+
+##### After the app has been successfully launched, the App will show the status as "Ready(Running)". Grab the "Endpoint URL" next to Streamlit chat interface which will invoke the inference service (LLM Model loaded and in this case Mistral-7b-instruct).
 
 ```
 USE DATABASE NVIDIA_NEMO_MS_APP;
