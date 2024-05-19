@@ -6,13 +6,13 @@ This repo primarily shows how to download a Large Language Model [Mistral-7b-ins
 ![](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/NVIDIA%20Mistral%207B%20NIMS%20on%20SPCS.png)
 If you are interested to shrink a different Large Language Model from Huggingface, you need a different instruct.yaml file that will generate a new model which will fit in a smaller GPU.
 
-##### NVIDIA related
+##### NVIDIA
 
 In this example, We are not downloading the model hosted on [nvcr.io](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags), but we will still be using [NIMs container](https://registry.ngc.nvidia.com/orgs/ohlfw0olaadg/teams/ea-participants/containers/nemollm-inference-ms/tags) for optimized performance. So please register and create your a login credentials.
 
 ![](./NVIDIA-NeMo.gif)
 
-##### Huggingface related
+##### Huggingface
 
 Since you are downloading the model from Huggingface, you need to register and create a [HuggingFace](https://huggingface.co/) user login. After logging into huggingface with your userid and password, [create a user access token](https://huggingface.co/docs/hub/en/security-tokens) to clone any model using git_lfs in your destination. This is a required step to clone a Large Language model such as Mistral-7b-instructv0.1  
 
@@ -39,8 +39,9 @@ Please note, the folder where the model (git clone) gets downloaded is a blockst
 ```
 
 ##### Model Generator Explained
-Follow these 5 important steps  
-1. Create Folders to download model from huggingface and a folder for storing the generated model.
+
+It does these important steps  
+1. Create Folders to download model from huggingface and a folder to store the model generated.
 2. Git Clone llm model to Blockstorage folder
 3. Generate new model that is shrunk for A10G(GPU_NV_M) into the Blockstorage folder
 4. Create Soft links of the "ensemble" and "trt_llm" folders to the root /model-store folder.
@@ -64,6 +65,7 @@ ln -s /blockstore/model/store/trt_llm_0.0.1_trtllm /model-store/trt_llm_0.0.1_tr
 ```
 
 ##### Inference service launch explained
+
 In the yaml file while launching the Inference service, 
 1. Executes the [modelgenerator.sh](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/docker/inference/modelgenerator.sh) to generate the model as explained above.
 2. Launch the tritron inference server inside the container with the number of gpu instances requested/assigned.
@@ -87,9 +89,9 @@ In the yaml file while launching the Inference service,
 
 ##### Snowflake related
 
-This is a POC SPCS / NA service implementing the NVIDIA NeMo Microservices inference service. You can access the inference service by a Snowflake UDF. You can find the UDFs in your instance schema under Functions.
+This is a POC SPCS / NA service implementing the NVIDIA NeMo Microservices inference service. You need to have feature enabled in the regions where it is available. So please reach out to your snowflake account representative if you wish to build this App. After the feature is enabled, follow the steps below.
 
-Under the hood, this app uses [fastchat api](https://github.com/lm-sys/FastChat/blob/main/docs/openai_api.md) exposed via a [flask app](https://flask.palletsprojects.com/en/3.0.x/).  The flask app currently implements only a completion route but can easily be extended to serve additional routes.
+Before you start the installation, Create the necessary [Provider and Consumer roles](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/00%20CREATE%20ROLES.sql) assuming AccountAdmin role.
 
 # Installation
 
@@ -97,7 +99,7 @@ Under the hood, this app uses [fastchat api](https://github.com/lm-sys/FastChat/
 
 Since we are using a currently PrPr, soon to be PuPr NA <-> SPCS feature, you need to request the account where you are planning to build the provider app is enabled.
 
-##### As a Provider  
+### As a Provider  
 Execute the Following scripts in sequence from the Provider scripts.  
 1. [Setup.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/01%20Setup.sql)
 
@@ -116,14 +118,14 @@ Execute the Following the scripts in this sequence from the Provider scripts.
 ##### Publish Your Native App. 
 Before you publish the App, try to test your App [locally](https://docs.snowflake.com/en/developer-guide/native-apps/installing-testing-application)
 
-If you are sharing internally within your Snowflake Org, you can keep the App Distribution as "internal" but if you are sharing externally then you need to assign the App Distribution as "external". Follow the steps [here](https://other-docs.snowflake.com/en/native-apps/provider-publishing-app-package)
+If you are sharing internally within your Snowflake Org, you can keep the App Distribution as "internal" but if you are sharing externally then you need to assign the App Distribution as "external". 
 
 Execute the below script to publish the Application to Marketplace as a Listing.
 4. [Publish Application.sql](https://github.com/Snowflake-Labs/sfguide-build-ai-app-using-nvidia-snowpark-container-services/blob/main/Native%20App/Provider/04%20Publish%20Application.sql)  
 
-Follow the [steps](https://other-docs.snowflake.com/en/native-apps/provider-publishing-app-package) to share the app to consumer
+Follow these [steps](https://other-docs.snowflake.com/en/native-apps/provider-publishing-app-package) to share the app to consumer
 
-##### As a Consumer
+### As a Consumer
 
 Follow these [steps](https://other-docs.snowflake.com/en/native-apps/consumer-about) to download and install the Native App
 
