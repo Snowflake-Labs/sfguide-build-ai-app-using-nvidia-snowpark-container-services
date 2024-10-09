@@ -2,7 +2,7 @@ FROM nvcr.io/ohlfw0olaadg/ea-participants/nemollm-inference-ms:24.02
 
 USER root
 RUN apt-get update && \
-    apt-get -y install sudo
+    apt-get -y install curl sudo
 
 RUN VER=$( curl --silent "https://api.github.com/repos/tsl0922/ttyd/releases/latest"| grep '"tag_name"'|sed -E 's/.*"([^"]+)".*/\1/') \
     && curl -LO https://github.com/tsl0922/ttyd/releases/download/$VER/ttyd.x86_64 \
